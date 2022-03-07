@@ -15,11 +15,11 @@ const person = {
   ]
 }
 // Sử dụng hàm trong react
-const showAge = (age) => <p>Tuoi cua ban la: {age}</p>
+const showAge = (age) => <p>Tuoi cua ban la: {age}</p> // 20
 
 // Sử dụng component trong react
 
-const ShowAge = props => <p>Tuoi cua ban la: {props.age}</p> // { age: 20 }
+const ShowAge = props => <p>Tuoi cua ban la: {props.age}</p> // { age: 20, name: "Dat" }
 
 ReactDOM.render(<div>
   <p>Ten: {person.name} </p>
@@ -31,5 +31,5 @@ ReactDOM.render(<div>
     </li>)}
   </ul>
   <div>function: { showAge(person.age) }</div>
-  <div>Component: <ShowAge age={person.age} /></div>
+  <div>Component: <ShowAge age={person.age} name="Dat" /></div>
 </div>, document.querySelector('#root'));
