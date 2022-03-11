@@ -8,15 +8,31 @@ const ShowInfo = (props) => {
 }
 
 function App(){
+  const producst = []
   const [count, setCount] = useState(0);
   const [color, setColor] = useState("green");
-  const [myStatus, setMyState] = useState(false);
-  const [products, setProducts] = useState([{id: 1, name: "A"}, {id: 2, name: "B"}])
+  const [myStatus, setMyStatus] = useState(false);
+  const [products, setProducts] = useState([{id: 1, name: "A"}, {id: 2, name: "B"}, { id: 3, name: "C"}])
+  // remove Item
+  const removeItem = (id) => {
+    const newProducts = products.filter(item => item.id !== id);
+    setProducts(newProducts);
+  }
   return <div>
-      Number: {count} <br />
+     <h2>Demo State basic </h2> <hr /> 
       String: <div style={{background: color, width: 100, height: 100}}>Content</div> <br />
       Boolean: { myStatus ? "Da ket hon" : "Chua ket hon"} <br />
-      Arr: {products.map(item => item.name)}
+      
+      <h2>Demo event</h2>
+      Number: {count} <br /> <button onClick={() => setCount(count+1)}>Click count</button>
+      <button onClick={() => setMyStatus(!myStatus)}>Toggled Status</button>
+      <br />
+      { myStatus && <div>
+        Arr: {products.map(item => <div>{item.name} 
+          <button onClick={() => removeItem(item.id) }>Delete</button></div>)}
+      </div>}
+      <hr />
+      
   </div>
 }
 export default App
