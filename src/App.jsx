@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
+import Box from './components/Box'
 
 
 const ShowInfo = (props) => {
@@ -20,7 +21,7 @@ function App(){
   }
   return <div>
      <h2>Demo State basic </h2> <hr /> 
-      String: <div style={{background: color, width: 100, height: 100}}>Content</div> <br />
+      String:  <Box color={color} /><br />
       Boolean: { myStatus ? "Da ket hon" : "Chua ket hon"} <br />
       
       <h2>Demo event</h2>
