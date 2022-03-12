@@ -9,15 +9,13 @@ const myObj = { id: 1, name: "Dat" };
 const numberArr = [1, 3, 3, 4];
 const stringArr = ["a", "b", "c"];
 const objectArr = [{ id: 1, name: "A" }, { id: 2, name: "B" }];
-function sum(numA, numB) {
-    return numA + numB;
+function display(result) {
+    document.querySelector('#root').innerHTML = result;
 }
-sum(a, b);
-/**
- * tsc --init
- * target: "es2018"
- * baseUrl: "./src"
- * outDir: "./dist"
- * sourceMap: true
- */ 
+function sum(numA, numB, callback) {
+    const result = numA + numB;
+    callback(result);
+    // return numA + numB;
+}
+sum(10, 20, display);
 //# sourceMappingURL=app.js.map

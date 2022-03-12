@@ -24,16 +24,36 @@ const numberArr: number[] = [1,3,3,4];
 const stringArr: string[] = ["a","b","c"];
 const objectArr: User[] = [{id: 1, name: "A"}, {id: 2, name: "B"}];
 
-
-function sum(numA: number, numB:number):number{
-    return numA + numB;
+function display(result: number){
+    document.querySelector('#root').innerHTML = result;
 }
-sum(a,b)
 
-/**
- * tsc --init 
- * target: "es2018"
- * baseUrl: "./src"
- * outDir: "./dist"
- * sourceMap: true
- */
+function sum(numA: number, numB:number, callback: (result: number) => void): void{
+    const result = numA + numB;
+    callback(result)
+    // return numA + numB;
+}
+sum(10,20, display)
+
+
+const person = {
+    name: "Dat";
+}
+
+
+
+
+const show = <T, U>(a: T, b: U): [T,U] => {
+    return [a, b];
+}
+show(10,"20");
+show("Le","Dat");
+
+type Product = {
+    id: number,
+    name: string
+}
+const getProducts = <T extends Product>(products: T[]) => {
+    const result = products.map(item => `<div>${item.name}</div>`)
+}
+getProducts([{id: 1, name:"A"}, {id: 2, name: "B"}]);
