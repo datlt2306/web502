@@ -1,8 +1,11 @@
 "use strict";
-function sum(a, b) {
-    return a + b;
+Object.defineProperty(exports, "__esModule", { value: true });
+const products = [
+    { id: 1, name: "Product A" },
+    { id: 2, name: "Product B" },
+];
+function show(products) {
+    console.log(products);
+    // products.map(item: { id: number, name: string} => item.name);
 }
-const a = 10;
-const b = 20;
-const result = sum(a, b);
-console.log(result);
+show(products);

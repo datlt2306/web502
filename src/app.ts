@@ -1,39 +1,22 @@
-type TPerson = {
-    id: number;
-    name: string;
-    age: number;
-    status?: boolean
-}
+export  {};
 
-const person: TPerson = {
-    id: 1,
-    name: "Dat",
-    age: 20
+type Product = {
+    id: number, name: string
 }
-
-const persons: TPerson[] = [
-    { id: 1, name: "Dat", age: 20, status: true},
-    { id: 2, name: "Kien", age: 22, status: false},
+const products: Product[] = [
+    {id: 1, name: "Product A"},
+    {id: 2, name: "Product B"},
 ]
-
-
-
-const show = ():void => {
-    console.log()
+function show<T extends Product[]>(products: T): void{
+    const result = products.map(item => `<div>${item.name}</div>`);
+    
 }
 
-const arrString: string[] = ["1","2","3"];
-const arrNumber: number[] = ["1","2","3"];
-console.log(person.name);
+show(products);
 
-
-
-type AppProps = {
-    message: string
+type TCallBack = {
+    (result: number) : void
 }
-
-const DemoApp = (props: AppProps) => {
-    console.log(props)
+function sum(a: number, b: number, callback: TCallBack) : number{
+    return a + b;
 }
-
-DemoApp({message: "Hello"})
