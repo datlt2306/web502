@@ -8,9 +8,12 @@ function App() {
     name: "Dat",
     age: 22
   });
-  
+
+  const [count, setCount] = useState<number>(0);
+
   return (
     <div className="App">
+      {count} <button onClick={() => setCount(count + 1)}>Click</button>
       <ShowInfo info={info}/>
     </div>
   )
