@@ -4,13 +4,14 @@ import logo from './logo.svg'
 import './App.css'
 import ShowInfo from './components/ShowInfo'
 import type { ProductType } from './types/product';
+import { list, remove } from './api/product';
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]);
   // const [count, setCount] = useState<number>(0);
   
   useEffect(() => {
      const getProducts = async () => {
-        const { data } = await axios.get('http://localhost:8000/api/products');
+        const { data } = await list();
         setProducts(data);
      }
      getProducts();
@@ -18,7 +19,7 @@ function App() {
 
   const removeItem = async (id: number) => {
     // xoa tren API
-    const { data } = await axios.delete('http://localhost:8000/api/product/'+id)
+    const { data } = await remove(id);
     // reRender
     data && setProducts(products.filter(item => item._id !== data._id));
   }
