@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
 import ShowInfo from './components/ShowInfo'
@@ -9,18 +9,23 @@ interface IProduct{
     name: string
 }
 
-const data = [
-  { id: 1, name: "Product A"}, // item
-  { id: 2, name: "Product B"}, // item
-]
-
 function App() {
   const [count, setCount] = useState(0)
-  const [products, setProducts] = useState<IProduct[]>(data)
+  const [products, setProducts] = useState<IProduct[]>([]);
+
+  useEffect(() => {
+    const getProducts = async () => {
+        const response = await fetch('http://localhost:8000/api/products');
+        const data = await response.json();
+        setProducts(data);
+    };
+    getProducts();
+  }, [])
+
   return (
     <div className="App">
         <ShowInfo name="abc" age={10}/>
-        {products.map(item => <Product data={item} />)}
+        {products.map(item => <div>{item.name}</div>)}
     </div>
   )
 }
