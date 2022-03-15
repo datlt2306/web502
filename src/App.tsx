@@ -3,6 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import ShowInfo from './components/ShowInfo'
 import Product from './components/Product'
+import { list } from './api/product'
 
 interface IProduct{
     id: number, 
@@ -15,8 +16,7 @@ function App() {
 
   useEffect(() => {
     const getProducts = async () => {
-        const response = await fetch('http://localhost:8000/api/products');
-        const data = await response.json();
+        const { data } = await list();
         setProducts(data);
     };
     getProducts();
