@@ -5,11 +5,12 @@ import './App.css'
 import ShowInfo from './components/ShowInfo'
 import type { ProductType } from './types/product';
 import { list, remove } from './api/product';
+import { NavLink, Route, Routes } from 'react-router-dom';
 function App() {
-  const [products, setProducts] = useState<ProductType[]>([]);
+  const [products, setProducts] = useState<ProductType[]>([]); // 1
   // const [count, setCount] = useState<number>(0);
   
-  useEffect(() => {
+  useEffect(() => { // 3
      const getProducts = async () => {
         const { data } = await list();
         setProducts(data);
@@ -23,16 +24,16 @@ function App() {
     // reRender
     data && setProducts(products.filter(item => item._id !== data._id));
   }
-  return (
+  return ( // 2
     <div className="App">
-      <table>
+      {/* <table>
         <thead>
           <th>#</th>
           <th>Name</th>
           <th></th>
         </thead>
         <tbody>
-          {products.map((item, index) => {
+          {products && products.map((item, index) => {
             return <tr>
                     <td>{index + 1}</td>
                     <td>{item.name}</td>
@@ -43,7 +44,20 @@ function App() {
           })}
           
         </tbody>
-      </table>
+      </table> */}
+      <header>
+        <ul>
+          <li><NavLink to="/">Home page</NavLink></li>
+          <li><NavLink to="/product">Product</NavLink></li>
+          <li><NavLink to="/about">About</NavLink></li>
+        </ul>
+      </header>
+      <main>
+      <Routes>
+        <Route path="/" element={<h1>Home page</h1>} />
+        <Route path="product" element={<h1>Product page</h1>} />
+      </Routes>
+      </main>
       
     </div>
   )
