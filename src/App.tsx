@@ -4,17 +4,12 @@ import './App.css'
 import { NavLink, Route, Routes } from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import ProductPage from './pages/Product'
+import Header from './components/Header'
 
 function App() {
   return (
     <div className="container">
-      <header>
-        <ul>
-          <li><NavLink to="/">Home Page</NavLink></li>
-          <li><NavLink to="/product">Product</NavLink></li>
-          <li><NavLink to="/about">About</NavLink></li>
-        </ul>
-      </header>
+      <Header />
       <main>
           <Routes>
             <Route path="/" element={<Homepage />} />
