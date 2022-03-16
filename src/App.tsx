@@ -5,9 +5,13 @@ import ShowInfo from './components/ShowInfo'
 
 import type { Product } from './types/product';
 import { list } from './api/product';
-import { NavLink, Route, Routes } from 'react-router-dom';
+import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
 import ProductPage from './pages/ProductPage';
+import AdminLayout from './pages/layouts/AdminLayout';
+import WebsiteLayout from './pages/layouts/WebsiteLayout';
+import Dashboard from './pages/Dashboard';
+import ProductManager from './pages/ProductManager';
 
 function App() {
   const [products, setProducts] = useState<{_id: number, name: string}[]>([])
@@ -30,9 +34,15 @@ function App() {
         </header>
         <main>
           <Routes>
-            <Route path="/" element={<HomePage />}/>
-            <Route path="product" element={<ProductPage />}/>
-            <Route path="about" element={<h1>About page</h1>}/>
+            <Route path="/" element={<WebsiteLayout />}>
+                <Route index element={<HomePage />} />
+                <Route path="product" element={<ProductPage />} /> 
+            </Route>
+            <Route path="admin" element={<AdminLayout />}>
+                <Route index element={<Navigate to="/admin/dashboard" />} />
+                <Route path="dashboard" element={<Dashboard />} />
+                <Route path="product" element={<ProductManager />} />
+            </Route>
           </Routes>
         </main>
     </div>
