@@ -13,6 +13,8 @@ const ProductDetail = () => {
         getProduct();
     }, [id])
   return (
+      // nullish : kiểm tra nếu product có dữ liệu thì cho phép truy cập vào thuộc tính name
+      // ngược lại thì default null
     <div>{product?.name}</div>
   )
 }
