@@ -1,22 +1,26 @@
 import { useState } from 'react'
 import logo from './logo.svg'
 import './App.css'
-import { NavLink, Route, Routes } from 'react-router-dom'
+import { Navigate, NavLink, Route, Routes } from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import ProductPage from './pages/Product'
 import Header from './components/Header'
+import WebsiteLayout from './pages/layouts/WebsiteLayout'
+import AdminLayout from './pages/layouts/AdminLayout'
 
 function App() {
   return (
     <div className="container">
-      <Header />
-      <main>
-          <Routes>
-            <Route path="/" element={<Homepage />} />
-            <Route path="product" element={<ProductPage />}/>
-            <Route path="about" element={<h1>About Page</h1>}/>
-          </Routes>
-      </main>
+        <Routes>
+          <Route path="/" element={<WebsiteLayout />}>
+              <Route index element={<Homepage />} />
+              <Route path="product" element={<h1>Product Page</h1>}/>
+          </Route>
+          <Route path="admin" element={<AdminLayout />}>
+              <Route index element={<Navigate to="dashboard" />} />
+              <Route path="dashboard" element={<h1>Dashboard page</h1>} />
+          </Route>
+        </Routes>
     </div>
   )
 }
