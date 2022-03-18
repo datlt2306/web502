@@ -3,7 +3,7 @@ import logo from './logo.svg'
 import './App.css'
 import ShowInfo from './components/ShowInfo'
 
-import type { Product } from './types/product';
+import type { ProductType } from './types/product';
 import { add, list } from './api/product';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import HomePage from './pages/HomePage';
@@ -16,7 +16,7 @@ import ProductDetail from './pages/ProductDetail';
 import ProductAdd from './pages/ProductAdd';
 
 function App() {
-  const [products, setProducts] = useState<{_id: number, name: string}[]>([])
+  const [products, setProducts] = useState<ProductType[]>([])
 
   useEffect(() => {
     const getProducts = async () => {
@@ -26,11 +26,9 @@ function App() {
     getProducts();
   }, []);
 
+  // Add Product
   const onHandleAdd = async (product: any) => {
-    console.log('app.js', product);
-    // api
     const {data} = await add(product);
-    // reRender
     setProducts([...products, data]);
   }
   return (
@@ -46,15 +44,18 @@ function App() {
           <Routes>
             <Route path="/" element={<WebsiteLayout />}>
                 <Route index element={<HomePage />} />
-                  <Route path="product" element={<ProductPage products={products}/>}  />
-                  <Route path="/product/:id" element={<ProductDetail />} />
-                  <Route path="/product/add" element={<ProductAdd name="Dat" onAdd={onHandleAdd} />} />
+                <Route path="product">
+                  <Route index element={<ProductPage/>}/>
+                  <Route path=":id" element={<ProductDetail />} />
+                </Route>
             </Route>'
-            
-            '
             <Route path="admin" element={<AdminLayout />}>
                 <Route index element={<Navigate to="dashboard" />} />
                 <Route path="dashboard" element={<Dashboard />} />
+                <Route path="product">
+                  <Route index  element={<ProductManager products={products} />} />
+                  <Route path="add" element={<ProductAdd onAdd={onHandleAdd} />} />
+                </Route>
             </Route>
           </Routes>
         </main>

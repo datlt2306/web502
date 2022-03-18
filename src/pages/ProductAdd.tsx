@@ -7,7 +7,6 @@ type Inputs = { // kiểu dữ liệu của từng input
   };
   
 type ProductAddProps = {
-    name: string,
     onAdd: (product: Inputs) => void
 }
 const ProductAdd = (props: ProductAddProps) => {
@@ -17,7 +16,7 @@ const ProductAdd = (props: ProductAddProps) => {
     const onSubmit: SubmitHandler<Inputs>  = (dataInput) => {
         props.onAdd(dataInput);
         // chuyển trang
-        navigate("/");
+        navigate("/admin/product");
     }
   return (
     <div>
