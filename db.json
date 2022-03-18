@@ -4,6 +4,11 @@
       "name": "product A",
       "price": "1231321321",
       "id": 1
+    },
+    {
+      "name": "product B",
+      "price": "123456",
+      "id": 2
     }
   ]
 }

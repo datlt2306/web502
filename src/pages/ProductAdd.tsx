@@ -1,5 +1,6 @@
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ProductType } from "../types/product";
+import { useNavigate } from 'react-router-dom';
 
 type ProductAddProps = {
     onAdd: (product: ProductType) => void
@@ -9,9 +10,11 @@ type FormValues = {
     price: number,
 };
 const ProductAdd = (props: ProductAddProps) => {
-    const { register, handleSubmit, formState: { errors}} = useForm<FormValues>()
+    const { register, handleSubmit, formState: { errors}} = useForm<FormValues>();
+    const navigate = useNavigate();
     const onSubmit: SubmitHandler<FormValues> = (data) => {
-        props.onAdd(data)
+        props.onAdd(data);
+        navigate('/admin/product');
     }
   return (
     <div>
