@@ -4,7 +4,7 @@ import logo from './logo.svg'
 import './App.css'
 import ShowInfo from './components/ShowInfo'
 import type { ProductType } from './types/product';
-import { list, remove } from './api/product';
+import { add, list, remove } from './api/product';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Product from './pages/Product';
@@ -33,6 +33,12 @@ function App() {
     // reRender
     data && setProducts(products.filter(item => item._id !== data._id));
   }
+
+  const onHandleAdd = async (product: ProductType) => {
+    // call api
+    const { data} = await add(product);
+    setProducts([...products, data])
+  }
   return ( 
     <Routes>
       <Route path="/" element={<WebsiteLayout />}>
@@ -43,7 +49,7 @@ function App() {
         <Route index element={<Navigate to="dashboard"/>} />
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="product" element={<ManagerProduct data={products}/>} />
-        <Route path="/admin/product/add" element={<ProductAdd />} />
+        <Route path="/admin/product/add" element={<ProductAdd onAdd={onHandleAdd}/>} />
       </Route>
     </Routes>
   )
