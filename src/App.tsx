@@ -46,7 +46,7 @@ function App() {
           <Routes>
             <Route path="/" element={<WebsiteLayout />}>
                 <Route index element={<HomePage />} />
-                  <Route path="product" element={<ProductPage/>}  />
+                  <Route path="product" element={<ProductPage products={products}/>}  />
                   <Route path="/product/:id" element={<ProductDetail />} />
                   <Route path="/product/add" element={<ProductAdd name="Dat" onAdd={onHandleAdd} />} />
             </Route>'
