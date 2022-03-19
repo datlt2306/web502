@@ -15,6 +15,7 @@ import Dashboard from './pages/Dashboard';
 import ProductManager from './pages/ProductManager';
 import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
+import ProductAdd from './pages/ProductAdd';
 
 
 function App() {
@@ -71,7 +72,10 @@ function App() {
             <Route path="admin" element={<AdminLayout />}>
                 <Route index element={<Navigate to="dashboard"/>} />
                 <Route path="dashboard" element={<Dashboard />} />
-                <Route path="products" element={<ProductManager />} />
+                <Route path="products">
+                    <Route  element={<ProductManager />} />
+                    <Route path="add" element={<ProductAdd />} />
+                </Route>
             </Route>
           </Routes>
         </main>
