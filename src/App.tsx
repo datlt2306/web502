@@ -25,9 +25,9 @@ function App() {
   }, [])
 
   const removeItem = (id) => {
-    console.log('app.js', id);
+    
     remove(id);
-
+    // reRender
     setProducts(products.filter(item => item.id !== id));
 
 
@@ -54,7 +54,7 @@ function App() {
           <Route path="admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="dashboard" />} />
               <Route path="dashboard" element={<h1>Dashboard page</h1>} />
-              <Route path="product" element={<ProductManager products={products} onAdd={removeItem}/>} />
+              <Route path="product" element={<ProductManager products={products} onRemove={removeItem}/>} />
           </Route>
         </Routes>
     </div>

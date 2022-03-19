@@ -3,11 +3,11 @@ import { ProductType } from './types/product'
 
 type ProductManagerProps = {
    products: ProductType[],
-   onAdd: (id: number) => void
+   onRemove: (id: number) => void
 }
 
 
-const ProductManager = ({ products, onAdd }: ProductManagerProps) => {
+const ProductManager = ({ products, onRemove }: ProductManagerProps) => {
 
   return (
     <div>
@@ -27,7 +27,7 @@ const ProductManager = ({ products, onAdd }: ProductManagerProps) => {
               <td>{item.name}</td>
               <td>{item.price}</td>
               <td>
-                <button onClick={() => onAdd(item.id)}>Remove</button>
+                <button onClick={() => onRemove(item.id)}>Remove</button>
               </td>
             </tr>
           })}
