@@ -1,4 +1,5 @@
 import { useForm, SubmitHandler } from 'react-hook-form';
+import { useNavigate } from 'react-router-dom';
 
 type ProductAddProps = {
     name: string,
@@ -11,9 +12,12 @@ type TypeInputs = {
 
 const ProductAdd = (props: ProductAddProps) => {
     const { register, handleSubmit, formState: { errors }} = useForm<TypeInputs>();
+    const navigate = useNavigate();
 
     const onSubmit: SubmitHandler<TypeInputs> = data => {
         props.onAdd(data); 
+        navigate("/admin/products")
+        
     }
   return (
     <form onSubmit={handleSubmit(onSubmit)}>
