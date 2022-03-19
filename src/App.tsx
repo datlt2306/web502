@@ -6,7 +6,7 @@ import "./dashboard.css";
 
 import ShowInfo from './components/ShowInfo'
 import Product from './components/Product'
-import { list, remove } from './api/product';
+import { add, list, remove } from './api/product';
 import axios from 'axios';
 import type { IProduct } from './types/product';
 import AdminLayout from './pages/layouts/AdminLayout';
@@ -32,18 +32,16 @@ function App() {
   const removeItem = (id: number) => {
       // call api
       remove(id);
-
       // reRender
-      setProducts(products.filter(item => item._id !== id));
+      setProducts(products.filter(item => item.id !== id));
+  }
+
+  const onHandleAdd = async (product: IProduct) => {
+    const { data } = await add(product);
+    setProducts([...products, data]);
   }
   return (
     <div className="App">
-
-      {products.map(item => {
-        return  <div>{item.name} <button onClick={() => removeItem(item._id)}>Remove</button></div>
-      })}
-
-
         <header>
           <ul>
             <li>
@@ -73,8 +71,8 @@ function App() {
                 <Route index element={<Navigate to="dashboard"/>} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="products">
-                    <Route  element={<ProductManager />} />
-                    <Route path="add" element={<ProductAdd />} />
+                    <Route index element={<ProductManager products={products} onRemove={removeItem}/>} />
+                    <Route path="add" element={<ProductAdd name="Dat" onAdd={onHandleAdd}/>} />
                 </Route>
             </Route>
           </Routes>
