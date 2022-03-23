@@ -1,17 +1,21 @@
 import React, { useEffect, useState } from 'react'
 import { SubmitHandler, useForm } from 'react-hook-form';
-import { useParams } from 'react-router-dom';
-import { read } from '../api/product';
+import { useParams, useNavigate } from 'react-router-dom';
+import { read, update } from '../api/product';
+import { ProductType } from '../types/product';
 
-type Props = {}
+type ProductEditProps = {
+    onUpdate: (product: ProductType) => void
+}
 type FormInputs = {
     name: string,
     price: number
 }
 
-const ProductEdit = (props: Props) => {
+const ProductEdit = (props: ProductEditProps) => {
     const { register, handleSubmit, formState: {errors}, reset} = useForm<FormInputs>();
     const { id } = useParams();
+    const navigate = useNavigate();
 
     useEffect(() => {
         const getProduct = async () => {
@@ -22,7 +26,8 @@ const ProductEdit = (props: Props) => {
     },[]);
 
     const onSubmit: SubmitHandler<FormInputs> = data => {
-        console.log(data);
+        props.onUpdate(data)
+        navigate("/admin/product");
     }
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>
