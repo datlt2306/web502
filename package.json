@@ -3,6 +3,7 @@
   "private": true,
   "version": "0.0.0",
   "scripts": {
+    "start:server": "json-server --watch db.json --port 3001",
     "dev": "vite",
     "build": "tsc && vite build",
     "preview": "vite preview"
