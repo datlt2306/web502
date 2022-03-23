@@ -2,13 +2,14 @@ import React from 'react'
 import { ProductType } from '../types/product'
 
 type ManagerProductProps = {
-    data: ProductType[]
+    data: ProductType[],
+    onRemove: (id: number) => void
 }
 
 const ManagerProduct = (props: ManagerProductProps) => {
   return (
-    <div>
-        <table>
+    <div className='container'>
+        <table className='table table-bordered'>
             <thead>
                 <tr>
                     <th>#</th>
@@ -22,7 +23,7 @@ const ManagerProduct = (props: ManagerProductProps) => {
                         <td>{index + 1}</td>
                         <td>{item.name}</td>
                         <td>
-                        {/* <button onClick={() => removeItem(item._id)}>Remove</button> */}
+                        <button onClick={() => props.onRemove(item.id)}>Remove</button>
                         </td>
                     </tr>
             })}

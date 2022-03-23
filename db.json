@@ -2,13 +2,8 @@
   "products": [
     {
       "name": "product A",
-      "price": "1231321321",
+      "price": "123",
       "id": 1
-    },
-    {
-      "name": "product B",
-      "price": "123456",
-      "id": 2
     }
   ]
 }
