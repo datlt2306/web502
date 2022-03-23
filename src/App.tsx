@@ -4,7 +4,7 @@ import logo from './logo.svg'
 import './App.css'
 import ShowInfo from './components/ShowInfo'
 import type { ProductType } from './types/product';
-import { add, list, remove } from './api/product';
+import { add, list, remove, update } from './api/product';
 import { Navigate, NavLink, Route, Routes } from 'react-router-dom';
 import Home from './pages/Home';
 import Product from './pages/Product';
@@ -42,6 +42,8 @@ function App() {
   }
   const onHandleUpdate = async (product:ProductType) => {
       console.log(product);
+     const { data } = await update(product)
+     setProducts(products.map(item => item.id == data.id ? data : item));
   }
   return ( 
     <Routes>
