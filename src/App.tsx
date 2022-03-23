@@ -15,6 +15,7 @@ import AdminLayout from './pages/layouts/AdminLayout';
 
 import "bootstrap/dist/css/bootstrap.min.css"
 import ProductAdd from './pages/ProductAdd';
+import ProductEdit from './pages/ProductEdit';
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]); // 1
   // const [count, setCount] = useState<number>(0);
@@ -39,6 +40,9 @@ function App() {
     const { data} = await add(product);
     setProducts([...products, data])
   }
+  const onHandleUpdate = async (product:ProductType) => {
+      console.log(product);
+  }
   return ( 
     <Routes>
       <Route path="/" element={<WebsiteLayout />}>
@@ -50,7 +54,8 @@ function App() {
         <Route path="dashboard" element={<Dashboard />} />
         <Route path="product">
           <Route index element={<ManagerProduct data={products} onRemove={onHandleRemove}/>} />
-          <Route path="/admin/product/add" element={<ProductAdd onAdd={onHandleAdd}/>} />
+          <Route path="add" element={<ProductAdd onAdd={onHandleAdd}/>} />
+          <Route path=":id/edit" element={<ProductEdit onUpdate={onHandleUpdate}/>} />
         </Route>
       </Route>
     </Routes>
