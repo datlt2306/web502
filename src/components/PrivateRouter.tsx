@@ -6,7 +6,7 @@ type PrivateRouterProps = {
 }
 
 const PrivateRouter = (props: PrivateRouterProps) => {
-    const isAuth = false; // lấy role từ localStorage ra
+    const isAuth = true; // lấy role từ localStorage ra
     if(!isAuth){
         return <Navigate to="/login" />
     }

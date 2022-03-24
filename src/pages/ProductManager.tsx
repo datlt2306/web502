@@ -1,37 +1,35 @@
 import React from 'react'
 import { Link } from 'react-router-dom';
-import { IProduct } from '../types/product'
+import { ProductTye } from '../types/product'
+import { Table, Tag, Space } from 'antd';
 
 type ProductManagerProps = {
-  products: IProduct[];
+  products: ProductTye[];
   onRemove: (id: number) => void
 }
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    key: 'price',
+  },
+]
 
 const ProductManager = (props: ProductManagerProps) => {
+  const dataSource = props.products.map((item, index) => {
+    return {
+      key: index + 1,
+      name: item.name,
+      price: item.price
+    }
+  })
   return (
-    <div>
-      <table>
-        <thead>
-          <th>#</th>
-          <th>Name</th>
-          <th>Price</th>
-          <th></th>
-        </thead>
-        <tbody>
-          {props.products.map((item, index) => {
-            return <tr key={index}>
-              <td>{index + 1}</td>
-              <td>{item.name}</td>
-              <td>{item.price}</td>
-              <td>
-                <Link to={`/admin/products/${item.id}/edit`}>Edit</Link>
-              <button onClick={() => props.onRemove(item.id)}>Remove</button>
-              </td>
-            </tr>
-          })}
-        </tbody>
-      </table>
-    </div>
+    <Table columns={columns} dataSource={dataSource} />
   )
 }
 
