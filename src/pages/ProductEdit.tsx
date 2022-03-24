@@ -2,13 +2,16 @@ import React, { useEffect, useState } from 'react';
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate, useParams } from 'react-router-dom';
 import { read } from '../api/product';
+import { ProductTye } from '../types/product';
 
-type Props = {}
+type ProductEditProps = {
+    onUpdate: (product: ProductTye) => void
+}
 type FormInputs = {
     name: string,
     price: number
 }
-const ProductEdit = (props: Props) => {
+const ProductEdit = (props: ProductEditProps) => {
     const { register, handleSubmit, formState: {errors}, reset} = useForm<FormInputs>();
     const navigate = useNavigate();
     const { id } = useParams();
@@ -24,6 +27,8 @@ const ProductEdit = (props: Props) => {
 
     const onSubmit: SubmitHandler<FormInputs> = data => {
         console.log(data)
+        props.onUpdate(data);
+        navigate("/admin/products")
         // bắn data ra ngoài app.js
         // redirect sang trang product
     } 

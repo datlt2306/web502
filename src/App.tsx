@@ -6,9 +6,9 @@ import "./dashboard.css";
 
 import ShowInfo from './components/ShowInfo'
 import Product from './components/Product'
-import { add, list, remove } from './api/product';
+import { add, list, remove, update } from './api/product';
 import axios from 'axios';
-import type { IProduct } from './types/product';
+import type { ProductTye } from './types/product';
 import AdminLayout from './pages/layouts/AdminLayout';
 import WebsiteLayout from './pages/layouts/WebsiteLayout';
 import Dashboard from './pages/Dashboard';
@@ -20,8 +20,7 @@ import ProductEdit from './pages/ProductEdit';
 
 
 function App() {
-  const [count, setCount] = useState(0)
-  const [products, setProducts] = useState<IProduct[]>([]);
+  const [products, setProducts] = useState<ProductTye[]>([]);
 
   useEffect(() => {
     const getProducts = async () => {
@@ -37,9 +36,14 @@ function App() {
       setProducts(products.filter(item => item.id !== id));
   }
 
-  const onHandleAdd = async (product: IProduct) => {
+  const onHandleAdd = async (product: ProductTye) => {
     const { data } = await add(product);
     setProducts([...products, data]);
+  }
+
+  const onHandleUpdate = async (product: ProductTye) => {
+    const { data } = await update(product);
+    setProducts(products.map(item => item.id == data.id ? data : item));
   }
   return (
     <div className="App">
@@ -73,7 +77,7 @@ function App() {
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="products">
                     <Route index element={<ProductManager products={products} onRemove={removeItem}/>} />
-                    <Route path=":id/edit" element={<ProductEdit />}/>
+                    <Route path=":id/edit" element={<ProductEdit onUpdate={onHandleUpdate}/>}/>
                     <Route path="add" element={<ProductAdd name="Dat" onAdd={onHandleAdd}/>} />
                 </Route>
             </Route>

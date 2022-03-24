@@ -1,4 +1,5 @@
 import React from 'react'
+import { Link } from 'react-router-dom';
 import { IProduct } from '../types/product'
 
 type ProductManagerProps = {
@@ -23,6 +24,7 @@ const ProductManager = (props: ProductManagerProps) => {
               <td>{item.name}</td>
               <td>{item.price}</td>
               <td>
+                <Link to={`/admin/products/${item.id}/edit`}>Edit</Link>
               <button onClick={() => props.onRemove(item.id)}>Remove</button>
               </td>
             </tr>
