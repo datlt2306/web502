@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react'
 import axios from 'axios';
 import logo from './logo.svg'
-import './App.css'
+import "antd/dist/antd.variable.min.css";
+
 import ShowInfo from './components/ShowInfo'
 import type { ProductType } from './types/product';
 import { add, list, remove, update } from './api/product';
@@ -16,6 +17,14 @@ import AdminLayout from './pages/layouts/AdminLayout';
 import "bootstrap/dist/css/bootstrap.min.css"
 import ProductAdd from './pages/ProductAdd';
 import ProductEdit from './pages/ProductEdit';
+import { ConfigProvider } from 'antd';
+
+ConfigProvider.config({
+  theme: {
+    primaryColor: '#25b864',
+  },
+});
+
 function App() {
   const [products, setProducts] = useState<ProductType[]>([]); // 1
   // const [count, setCount] = useState<number>(0);

@@ -1,16 +1,67 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ProductType } from '../types/product'
+import { ProductType } from '../types/product';
+import { Table, Space } from 'antd';
 
 type ManagerProductProps = {
     data: ProductType[],
     onRemove: (id: number) => void
 }
-
+interface DataType {
+  key: React.Key;
+  name: string;
+  price: number
+}
+const columns = [
+  {
+    title: 'Name',
+    dataIndex: 'name',
+    key: 'name',
+    render: (text: string) => <a>{text}</a>
+  },
+  {
+    title: 'Price',
+    dataIndex: 'price',
+    key: 'price',
+  },
+  {
+    title: 'Action',
+    key: 'action',
+    render: () => (
+      <Space size="middle">
+        <a>Invite</a>
+        <a>Delete</a>
+      </Space>
+  )}
+];
 const ManagerProduct = (props: ManagerProductProps) => {
+  const [selectionType, setSelectionType] = useState<'checkbox' | 'radio'>('checkbox');
+
+  const dataSource: DataType[] = props.data.map((item, index) => {
+    return {
+      key: index + 1,
+      name: item.name,
+      price: item.price
+    }
+  });
+  const rowSelection = {
+    onChange: (selectedRowKeys: React.Key[], selectedRows: DataType[]) => {
+      console.log(`selectedRowKeys: ${selectedRowKeys}`, 'selectedRows: ', selectedRows);
+    },
+    getCheckboxProps: (record: DataType) => ({
+      disabled: record.name === 'Disabled User', // Column configuration not to be checked
+      name: record.name,
+    }),
+  };
   return (
     <div className='container'>
-        <table className='table table-bordered'>
+      
+      <Table   rowSelection={{
+          type: selectionType,
+          ...rowSelection,
+        }}dataSource={dataSource} columns={columns} />
+
+        {/* <table className='table table-bordered'>
             <thead>
                 <tr>
                     <th>#</th>
@@ -31,7 +82,7 @@ const ManagerProduct = (props: ManagerProductProps) => {
             })}
             
             </tbody>
-      </table>
+      </table> */}
     </div>
   )
 }
