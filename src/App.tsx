@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react'
 import logo from './logo.svg'
-import './App.css'
 import { Navigate, NavLink, Route, Router, Routes } from 'react-router-dom'
 import Homepage from './pages/Homepage'
 import WebsiteLayout from './pages/layouts/WebsiteLayout'
@@ -15,7 +14,6 @@ import ShowInfo from './components/ShowInfo'
 import PrivateRouter from './components/PrivateRouter'
 
 function App() {
-  const [count, setCount] = useState(0);
   const [status, setStatus] = useState(false);
 
   const [products, setProducts] = useState<ProductType[]>([]);
