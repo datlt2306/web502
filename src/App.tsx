@@ -17,6 +17,7 @@ import Home from './pages/Home';
 import ProductDetail from './pages/ProductDetail';
 import ProductAdd from './pages/ProductAdd';
 import ProductEdit from './pages/ProductEdit';
+import PrivateRouter from './components/PrivateRouter';
 
 
 function App() {
@@ -72,11 +73,11 @@ function App() {
               <Route path="about" element={<h1>About page</h1>} />
             </Route>
             
-            <Route path="admin" element={<AdminLayout />}>
+            <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
                 <Route index element={<Navigate to="dashboard"/>} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="products">
-                    <Route index element={<ProductManager products={products} onRemove={removeItem}/>} />
+                    <Route index element={<PrivateRouter><ProductManager products={products} onRemove={removeItem}/></PrivateRouter>} />
                     <Route path=":id/edit" element={<ProductEdit onUpdate={onHandleUpdate}/>}/>
                     <Route path="add" element={<ProductAdd name="Dat" onAdd={onHandleAdd}/>} />
                 </Route>
