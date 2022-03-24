@@ -10,6 +10,7 @@ import ProductManager from './pages/ProductManager';
 import { ProductType } from './pages/types/product'
 import { add, list, remove } from './api/product'
 import ProductAdd from './pages/ProductAdd'
+import ProductEdit from './pages/ProductEdit'
 
 function App() {
   const [count, setCount] = useState(0);
@@ -58,8 +59,12 @@ function App() {
           <Route path="admin" element={<AdminLayout />}>
               <Route index element={<Navigate to="dashboard" />} />
               <Route path="dashboard" element={<h1>Dashboard page</h1>} />
-              <Route path="product" element={<ProductManager products={products} onRemove={removeItem}/>} />
-              <Route path="/admin/product/add" element={<ProductAdd onAdd={onHanldeAdd}/>} />
+              <Route path="product">
+                <Route index element={<ProductManager products={products} onRemove={removeItem}/>} />
+                <Route path="add" element={<ProductAdd onAdd={onHanldeAdd}/>} />
+                <Route path=":id/edit" element={<ProductEdit />}/>
+              </Route>
+              
           </Route>
         </Routes>
     </div>
