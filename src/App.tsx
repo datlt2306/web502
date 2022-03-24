@@ -11,6 +11,8 @@ import { ProductType } from './pages/types/product'
 import { add, list, remove, update } from './api/product'
 import ProductAdd from './pages/ProductAdd'
 import ProductEdit from './pages/ProductEdit'
+import ShowInfo from './components/ShowInfo'
+import PrivateRouter from './components/PrivateRouter'
 
 function App() {
   const [count, setCount] = useState(0);
@@ -45,11 +47,6 @@ function App() {
   return (
 
     <div className="container">
-      {count} <button onClick={() => setCount(count + 1)}>Click</button>
-      <button onClick={() => setStatus(true)}>Click</button>
-      <div>
-        {products.map(item => item.name)}
-      </div>
         <Routes>
           <Route path="/" element={<WebsiteLayout />}>
               <Route index element={<Homepage />} />
@@ -59,7 +56,7 @@ function App() {
               </Route>
               
           </Route>
-          <Route path="admin" element={<AdminLayout />}>
+          <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
               <Route index element={<Navigate to="dashboard" />} />
               <Route path="dashboard" element={<h1>Dashboard page</h1>} />
               <Route path="product">
@@ -69,6 +66,7 @@ function App() {
               </Route>
               
           </Route>
+          <Route path="/login" element={<h1>Login page</h1>} />
         </Routes>
     </div>
   )
