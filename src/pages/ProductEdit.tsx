@@ -1,31 +1,32 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useForm, SubmitHandler } from 'react-hook-form';
 import { useNavigate, useParams} from 'react-router-dom';
 import { read } from '../api/product';
+import { ProductType } from './types/product';
 
-type ProductEditProps = {}
+type ProductEditProps = {
+    onUpdate: (product: ProductType) => void
+}
 type FormInputs = {
     name: string,
     price: number
 }
 const ProductEdit = (props: ProductEditProps) => {
-    const { register, handleSubmit, formState: {errors}} = useForm<FormInputs>();
+    const { register, handleSubmit, formState: {errors}, reset} = useForm<FormInputs>();
     const navigate = useNavigate();
     const { id } = useParams();
 
     useEffect(() => {
         const getProduct = async () => {
             const { data } = await read(id);
-            console.log(data);
+            reset(data)
         }
         getProduct();
     }, [])
 
-
-
     const onSubmit: SubmitHandler<FormInputs> = data => {
-        console.log(data);
-        // navigate('/admin/product')
+        props.onUpdate(data);
+        navigate('/admin/product')
     }
   return (
     <form action="" onSubmit={handleSubmit(onSubmit)}>

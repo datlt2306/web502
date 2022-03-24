@@ -8,7 +8,7 @@ import AdminLayout from './pages/layouts/AdminLayout'
 import ProductDetail from './pages/ProductDetail'
 import ProductManager from './pages/ProductManager';
 import { ProductType } from './pages/types/product'
-import { add, list, remove } from './api/product'
+import { add, list, remove, update } from './api/product'
 import ProductAdd from './pages/ProductAdd'
 import ProductEdit from './pages/ProductEdit'
 
@@ -26,18 +26,21 @@ function App() {
       getProducts();
   }, [])
 
-  const removeItem = (id) => {
-    
+  const removeItem = (id: number) => {
     remove(id);
     // reRender
     setProducts(products.filter(item => item.id !== id));
-
-
     // setProduct()
   }
-  const onHanldeAdd = (data) => {
+  const onHanldeAdd = (data: ProductType) => {
       add(data);
       setProducts([...products, data])
+  }
+
+  const onHandleUpdate = async (product: ProductType) => {
+      const { data } = await update(product);
+      // reRender
+      setProducts(products.map(item => item.id === data.id ? data : item ));
   }
   return (
 
@@ -62,7 +65,7 @@ function App() {
               <Route path="product">
                 <Route index element={<ProductManager products={products} onRemove={removeItem}/>} />
                 <Route path="add" element={<ProductAdd onAdd={onHanldeAdd}/>} />
-                <Route path=":id/edit" element={<ProductEdit />}/>
+                <Route path=":id/edit" element={<ProductEdit onUpdate={onHandleUpdate}/>}/>
               </Route>
               
           </Route>
