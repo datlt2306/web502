@@ -15,6 +15,8 @@ import ProductManager from './pages/ProductManager';
 import ProductDetail from './pages/ProductDetail';
 import ProductAdd from './pages/ProductAdd';
 import ProductEdit from './pages/ProductEdit';
+import TestShowInfo from './components/TestShowInfo';
+import PrivateRouter from './components/PrivateRouter';
 
 function App() {
   const [products, setProducts] = useState<ProductType[]>([])
@@ -66,7 +68,7 @@ function App() {
                   <Route path=":id" element={<ProductDetail />} />
                 </Route>
             </Route>'
-            <Route path="admin" element={<AdminLayout />}>
+            <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}>
                 <Route index element={<Navigate to="dashboard" />} />
                 <Route path="dashboard" element={<Dashboard />} />
                 <Route path="product">
@@ -75,6 +77,7 @@ function App() {
                   <Route path="add" element={<ProductAdd onAdd={onHandleAdd} />} />
                 </Route>
             </Route>
+            <Route path="login" element={<h1>Login page</h1>} />
           </Routes>
         </main>
     </div>
@@ -82,6 +85,7 @@ function App() {
 }
 
 export default App
+
 
 
 
