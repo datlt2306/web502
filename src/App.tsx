@@ -20,6 +20,8 @@ import ProductEdit from './pages/ProductEdit';
 import { ConfigProvider } from 'antd';
 import Test from './components/Test';
 import PrivateRouter from './components/PrivateRouter';
+import Signup from './pages/Signup';
+import Signin from './pages/Signin';
 
 ConfigProvider.config({
   theme: {
@@ -62,7 +64,8 @@ function App() {
       <Route path="/" element={<WebsiteLayout />}>
           <Route index element={<Home />} />
           <Route path="product" element={<Product />} />
-          <Route path="login" element={<h1>Login page</h1>} />
+          <Route path="signup" element={<Signup />}/>
+          <Route path="signin" element={<Signin />}/>
       </Route>
       <Route path="admin" element={<PrivateRouter><AdminLayout /></PrivateRouter>}> 
         <Route index element={<Navigate to="dashboard"/>} />
