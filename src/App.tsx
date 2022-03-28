@@ -16,6 +16,8 @@ import ProductDetail from './pages/ProductDetail';
 import ProductAdd from './pages/ProductAdd';
 import ProductEdit from './pages/ProductEdit';
 import PrivateRouter from './components/PrivateRouter';
+import Signup from './pages/Signup';
+import Signin from './pages/Signin';
 
 
 function App() {
@@ -80,6 +82,8 @@ function App() {
                     <Route path="add" element={<ProductAdd name="Dat" onAdd={onHandleAdd}/>} />
                 </Route>
             </Route>
+            <Route path="/signup" element={<Signup />}/>
+            <Route path="/signin" element={<Signin />}/>
           </Routes>
         </main>
     </div>
