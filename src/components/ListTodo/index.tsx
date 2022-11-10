@@ -8,7 +8,7 @@ interface ITodo {
 
 type ListTodoProps = {
     todos: ITodo[];
-    addTodo: (id: number) => void;
+    onRemove: (id: number) => void;
 };
 
 const ListTodo = (props: ListTodoProps) => {
@@ -16,7 +16,7 @@ const ListTodo = (props: ListTodoProps) => {
         <div>
             {props.todos.map((todo) => (
                 <div key={todo.id}>
-                    {todo.title} <button onClick={() => props.addTodo(todo.id)}>Remove</button>
+                    {todo.title} <button onClick={() => props.onRemove(todo.id)}>Remove</button>
                 </div>
             ))}
         </div>

@@ -1,4 +1,5 @@
 import React from "react";
+import AddTodo from "../AddTodo";
 import ListTodo from "../ListTodo";
 
 type Props = {};
@@ -9,13 +10,16 @@ const Todo = (props: Props) => {
         { id: 2, title: "Todo 2", completed: false },
         { id: 3, title: "Todo 3", completed: false },
     ]);
-    const onHandleAddTodo = (id: number) => {
-        console.log("id component todo", id);
+    const onHandleRemoveTodo = (id: number) => {
         setTodos(todos.filter((todo) => todo.id !== id));
+    };
+    const onHandleAddTodo = (todo: any) => {
+        setTodos([...todos, todo]);
     };
     return (
         <div>
-            <ListTodo todos={todos} addTodo={onHandleAddTodo} />
+            <AddTodo onAdd={onHandleAddTodo} />
+            <ListTodo todos={todos} onRemove={onHandleRemoveTodo} />
         </div>
     );
 };
