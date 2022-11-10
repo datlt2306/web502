@@ -1,30 +1,27 @@
 import React, { ReactText, useState } from "react";
+import { useForm, SubmitHandler } from "react-hook-form";
+import { ITodo } from "../../interfaces/todo";
 
 type Props = {
     onAdd: (todo: any) => void;
 };
 
 const AddTodo = (props: Props) => {
-    const [value, setValue] = useState("");
-    const onHandleChange = (e: any) => {
-        setValue(e.target.value);
-    };
+    const {
+        register,
+        handleSubmit,
+        formState: { errors },
+    } = useForm<ITodo>();
 
-    const onHandleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault();
-        const fakeObject = {
-            id: 10,
-            completed: true,
-            title: value,
-        };
-        props.onAdd(fakeObject);
+    const onSubmit: SubmitHandler<ITodo> = (data) => {
+        props.onAdd(data);
     };
     return (
         <div>
-            <form onSubmit={onHandleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <h1>Thêm sản phẩm</h1>
-                <input type="text" onChange={onHandleChange} />
-                {/* <input type="checkbox" name="completed" /> completed */}
+                <input type="text" {...register("title")} />
+                <input type="checkbox" {...register("completed")} /> completed
                 <br />
                 <button>Add</button>
             </form>

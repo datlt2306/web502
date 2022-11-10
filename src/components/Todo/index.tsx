@@ -14,7 +14,7 @@ const Todo = (props: Props) => {
         setTodos(todos.filter((todo) => todo.id !== id));
     };
     const onHandleAddTodo = (todo: any) => {
-        setTodos([...todos, todo]);
+        setTodos([...todos, { id: todos.length + 1, ...todo }]);
     };
     return (
         <div>
