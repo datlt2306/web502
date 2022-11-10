@@ -1,4 +1,3 @@
-import React, { ReactText, useState } from "react";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { ITodo } from "../../interfaces/todo";
 
