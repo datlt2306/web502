@@ -4,6 +4,7 @@ import { Routes, Route, Outlet } from "react-router-dom";
 import HomePage from "./pages/home";
 import AboutPage from "./pages/about";
 import LayoutWebsite from "./components/Layout/LayoutWebsite";
+import Login from "./pages/login";
 function App() {
     return (
         <>
@@ -11,6 +12,7 @@ function App() {
                 <Route path="/" element={<LayoutWebsite />}>
                     <Route index element={<HomePage />} />
                     <Route path="about" element={<AboutPage />} />
+                    <Route path="login" element={<Login />} />
                     <Route path="todo" element={<Todo />} />
                 </Route>
                 <Route path="*" element={<h1>Not Found</h1>} />
