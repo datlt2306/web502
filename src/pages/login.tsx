@@ -4,10 +4,7 @@ import { auth } from "../firebase";
 const provider = new GoogleAuthProvider();
 
 const LoginGoogleWithFirebase = async () => {
-    const result = await signInWithPopup(auth, provider);
-    const credential = await GoogleAuthProvider.credentialFromResult(result);
-    const token = credential?.accessToken;
-    const user = result.user;
+    await signInWithPopup(auth, provider);
 
     // save nodejs
 };

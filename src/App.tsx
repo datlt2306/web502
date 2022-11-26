@@ -5,6 +5,8 @@ import HomePage from "./pages/home";
 import AboutPage from "./pages/about";
 import LayoutWebsite from "./components/Layout/LayoutWebsite";
 import Login from "./pages/login";
+import LayoutAdmin from "./components/Layout/LayoutAdmin";
+import RequireAuth from "./components/Layout/RequireAuth";
 function App() {
     return (
         <>
@@ -14,6 +16,17 @@ function App() {
                     <Route path="about" element={<AboutPage />} />
                     <Route path="login" element={<Login />} />
                     <Route path="todo" element={<Todo />} />
+                </Route>
+                <Route
+                    path="/admin"
+                    element={
+                        <RequireAuth>
+                            <LayoutAdmin />
+                        </RequireAuth>
+                    }
+                >
+                    <Route index element={<h1>Dashboard</h1>} />
+                    <Route path="/admin/products" element={<h1>Product Page</h1>} />
                 </Route>
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
