@@ -9,7 +9,6 @@ const AddTodo = () => {
     } = useForm();
 
     const onSubmit = (data: any) => {
-        console.log("data", data);
         const formData = new FormData();
         formData.append("file", data.image[0]);
         formData.append("upload_preset", "jkbdphzy");
@@ -20,7 +19,13 @@ const AddTodo = () => {
             body: formData,
         })
             .then((response) => response.json())
-            .then((data) => console.log(data));
+            .then((data) => {
+                fetch("http://localhost:3001/api/products", {
+                    method: "POST",
+                    headers: {},
+                    body: JSON.stringify({ ...data, image: data.url }),
+                });
+            });
     };
     return (
         <div>
