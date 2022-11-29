@@ -1,30 +1,33 @@
 import { useState } from "react";
-import { useForm, SubmitHandler } from "react-hook-form";
-import { ITodo } from "../../interfaces/todo";
+import { useForm } from "react-hook-form";
 
-type AddTodoProps = {
-    onAdd: (todo: any) => void;
-};
-
-const AddTodo = (props: AddTodoProps) => {
+const AddTodo = () => {
     const {
         register,
         handleSubmit,
         formState: { errors },
-    } = useForm<ITodo>();
+    } = useForm();
 
-    const onSubmit: SubmitHandler<ITodo> = (data) => {};
+    const onSubmit = (data: any) => {
+        console.log("data", data);
+        const formData = new FormData();
+        formData.append("file", data.image[0]);
+        formData.append("upload_preset", "jkbdphzy");
+        formData.append("cloud_name", "ecommercer2021");
+
+        fetch("https://api.cloudinary.com/v1_1/ecommercer2021/image/upload", {
+            method: "post",
+            body: formData,
+        })
+            .then((response) => response.json())
+            .then((data) => console.log(data));
+    };
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <h1>Thêm sản phẩm</h1>
-                <input type="text" {...register("title", { required: true, minLength: 500 })} />
-                {errors.title && errors.title.type === "required" && (
-                    <p>Bắt buộc phải nhập trường này</p>
-                )}
-                {errors.title && errors.title.type === "minLength" && <p>Min length is 500</p>}
-                <input type="checkbox" {...register("completed")} /> completed
-                <br />
+                <input type="text" {...register("name")} />
+                <input type="file" {...register("image")} />
                 <button>Add</button>
             </form>
             <hr />

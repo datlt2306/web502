@@ -7,6 +7,7 @@ import LayoutWebsite from "./components/Layout/LayoutWebsite";
 import Login from "./pages/login";
 import LayoutAdmin from "./components/Layout/LayoutAdmin";
 import RequireAuth from "./components/Layout/RequireAuth";
+import AddTodo from "./components/AddTodo";
 function App() {
     return (
         <>
@@ -27,6 +28,7 @@ function App() {
                 >
                     <Route index element={<h1>Dashboard</h1>} />
                     <Route path="/admin/products" element={<h1>Product Page</h1>} />
+                    <Route path="/admin/products/add" element={<AddTodo />} />
                 </Route>
                 <Route path="*" element={<h1>Not Found</h1>} />
             </Routes>
