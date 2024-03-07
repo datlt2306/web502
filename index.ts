@@ -31,7 +31,8 @@ const unionType: "Thành công" | "Thất bại" = "Thành công";
 type TypeProduct = {
     id: number
     name: string,
-    price: number
+    price: number,
+    description?: string
 }
 const products: TypeProduct[] = [
     { id: 1, name: "Iphone 12", price: 1000 },
@@ -45,4 +46,3 @@ const showProduct = (data: TypeProduct[]): string => {
         `).join("")
 }
 showProduct(products);
-
