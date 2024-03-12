@@ -1,11 +1,13 @@
 import { useState } from "react";
 import "./App.css";
 import ProductItem from "./components/ProductItem";
+import Counter from "./components/Counter";
 
 function App() {
     return (
         <>
             <ProductItem />
+            <Counter />
         </>
     );
 }
