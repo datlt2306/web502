@@ -1,26 +1,15 @@
+import { useState } from "react";
 import "./App.css";
-
-type ShowInfoProps = {
-    name: string;
-    age: number;
-    children?: React.ReactNode;
-};
-function ShowInfo(props: ShowInfoProps): JSX.Element {
-    return (
-        <div>
-            Name: {props.name} - Age: {props.age}
-            <p>{props.children}</p>
-        </div>
-    );
-}
+import ProductItem from "./components/ProductItem";
 function App() {
     return (
         <>
-            <ShowInfo name="Dat" age={30}>
-                Có giá trị bên trong
-            </ShowInfo>
+            <ProductItem />
         </>
     );
 }
+// 1. tên sự kiện camelCase
+// 2. gọi tên hàm không có dấu ()
+// 3. truyền tham số vào hàm
 
 export default App;
