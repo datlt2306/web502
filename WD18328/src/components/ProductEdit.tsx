@@ -1,17 +1,17 @@
 import axios from "axios";
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import { IProduct } from "../interfaces/product";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-type ProductAddProps = {
-    onEdit: (product: IProduct) => void;
-};
+import { ProductContext } from "../context/ProductProvider";
+
 type Inputs = {
     name: string;
     price: number;
 };
 
-const ProductEdit = ({ onEdit }: ProductAddProps) => {
+const ProductEdit = () => {
+    const { onHandleEdit } = useContext(ProductContext);
     const navigate = useNavigate();
     const { id } = useParams();
     const {
@@ -23,12 +23,12 @@ const ProductEdit = ({ onEdit }: ProductAddProps) => {
 
     useEffect(() => {
         (async () => {
-            const { data } = await axios.get(`http://localhost:8080/api/products/${id}`);
+            const { data } = await axios.get(`http://localhost:3000/products/${id}`);
             reset(data);
         })();
     }, []);
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        onEdit(data);
+        onHandleEdit(data);
         navigate("/products");
     };
 

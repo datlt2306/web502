@@ -1,8 +1,13 @@
 import React, { useContext } from "react";
 import { CounterContext } from "../context/CounterContextProvider";
 const Counter = () => {
-    const count = useContext(CounterContext);
-    return <div>Counter: {count}</div>;
+    const { count, setCount } = useContext(CounterContext);
+    return (
+        <div>
+            Counter: {count}
+            <button onClick={() => setCount(count + 1)}>Click</button>
+        </div>
+    );
 };
 
 export default Counter;

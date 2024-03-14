@@ -1,17 +1,15 @@
-import React from "react";
-import { IProduct } from "../interfaces/product";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useContext } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+import { ProductContext } from "../context/ProductProvider";
 
-type ProductAddProps = {
-    onAdd: (product: IProduct) => void;
-};
 type Inputs = {
     name: string;
     price: number;
 };
 
-const ProductAdd = ({ onAdd }: ProductAddProps) => {
+const ProductAdd = () => {
+    const { onHandleAdd } = useContext(ProductContext);
     const navigate = useNavigate();
     const {
         register,
@@ -20,7 +18,7 @@ const ProductAdd = ({ onAdd }: ProductAddProps) => {
     } = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        onAdd(data);
+        onHandleAdd(data);
         navigate("/products");
     };
 

@@ -4,10 +4,13 @@ import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { createContext } from "react";
 import CounterContextProvider from "./context/CounterContextProvider";
+import ProductContextProvider from "./context/ProductProvider";
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <CounterContextProvider>
-        <BrowserRouter>
-            <App />
-        </BrowserRouter>
-    </CounterContextProvider>
+    <ProductContextProvider>
+        <CounterContextProvider>
+            <BrowserRouter>
+                <App />
+            </BrowserRouter>
+        </CounterContextProvider>
+    </ProductContextProvider>
 );

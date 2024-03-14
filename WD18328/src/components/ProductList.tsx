@@ -1,20 +1,17 @@
-import React from "react";
+import React, { useContext } from "react";
 import { IProduct } from "../interfaces/product";
 import { Link } from "react-router-dom";
+import { ProductContext } from "../context/ProductProvider";
 
-type ProductListProps = {
-    products: IProduct[];
-    onRemove: (id: number) => void;
-};
-
-const ProductList = ({ products, onRemove }: ProductListProps) => {
+const ProductList = () => {
+    const { products, onHanleRemove } = useContext(ProductContext);
     return (
         <div>
             {products.map((item: IProduct, index) => (
                 <div key={index}>
                     {item.name}
                     <Link to={`/products/${item.id}/edit`}>Edit</Link>
-                    <button onClick={() => onRemove(item.id!)}>Remove</button>
+                    <button onClick={() => onHanleRemove(item.id!)}>Remove</button>
                 </div>
             ))}
         </div>

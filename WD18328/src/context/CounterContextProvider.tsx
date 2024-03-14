@@ -4,12 +4,14 @@ type Props = {
     children: ReactNode;
 };
 
-export const CounterContext = createContext(0 as number);
+export const CounterContext = createContext({} as { count: number; setCount: any });
 const CounterContextProvider = ({ children }: Props) => {
-    const [count] = useState(10);
+    const [count, setCount] = useState(10);
     return (
         <div>
-            <CounterContext.Provider value={count}>{children}</CounterContext.Provider>
+            <CounterContext.Provider value={{ count, setCount }}>
+                {children}
+            </CounterContext.Provider>
         </div>
     );
 };
