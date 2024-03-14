@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { CountContext } from "../main";
+import { CounterContext } from "../context/CounterContextProvider";
 const Counter = () => {
-    console.log(useContext(CountContext));
-    return <div>Counter</div>;
+    const count = useContext(CounterContext);
+    return <div>Counter: {count}</div>;
 };
 
 export default Counter;

@@ -3,12 +3,11 @@ import App from "./App";
 import "./index.css";
 import { BrowserRouter } from "react-router-dom";
 import { createContext } from "react";
-const count = 10;
-export const CountContext = createContext(0 as number);
+import CounterContextProvider from "./context/CounterContextProvider";
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <CountContext.Provider value={count}>
+    <CounterContextProvider>
         <BrowserRouter>
             <App />
         </BrowserRouter>
-    </CountContext.Provider>
+    </CounterContextProvider>
 );

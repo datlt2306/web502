@@ -43,6 +43,7 @@ function App() {
             console.log(error);
         }
     };
+
     return (
         <>
             <Counter />
