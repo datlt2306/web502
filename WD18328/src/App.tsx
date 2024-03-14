@@ -5,6 +5,7 @@ import { Routes, Route } from "react-router-dom";
 import ProductList from "./components/ProductList";
 import ProductAdd from "./components/ProductAdd";
 import ProductEdit from "./components/ProductEdit";
+import Counter from "./components/Counter";
 function App() {
     const [products, setProducts] = useState<IProduct[]>([]);
     useEffect(() => {
@@ -44,6 +45,7 @@ function App() {
     };
     return (
         <>
+            <Counter />
             <Routes>
                 <Route path="/" element={<h1>Home Page</h1>} />
                 <Route

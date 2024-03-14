@@ -2,6 +2,7 @@ import React from "react";
 import { IProduct } from "../interfaces/product";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
+
 type ProductAddProps = {
     onAdd: (product: IProduct) => void;
 };
