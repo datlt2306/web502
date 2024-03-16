@@ -1,12 +1,28 @@
-import { useState } from "react";
+import axios from "axios";
+import { useContext, useEffect } from "react";
 import "./App.css";
-import ProductItem from "./components/ProductItem";
 import Counter from "./components/Counter";
+import { ProductContext } from "./context/ProductContextProvider";
+import { IProduct } from "./interfaces/product";
 
 function App() {
+    const { products, dispatch } = useContext(ProductContext);
+
+    useEffect(() => {
+        (async () => {
+            try {
+                const { data } = await axios.get(`http://localhost:3000/products`);
+                dispatch({ type: "SET_PRODUCTS", payload: data });
+            } catch (error) {
+                console.log(error);
+            }
+        })();
+    }, [dispatch]);
     return (
         <>
-            <ProductItem />
+            {products.value.map((item: IProduct, index: number) => (
+                <div key={index}>{item.name}</div>
+            ))}
             <Counter />
         </>
     );
