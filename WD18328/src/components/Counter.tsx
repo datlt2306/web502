@@ -1,11 +1,13 @@
 import React, { useContext } from "react";
 import { CounterContext } from "../context/CounterContextProvider";
 const Counter = () => {
-    const { count, setCount } = useContext(CounterContext);
+    const { count, dispatch } = useContext(CounterContext);
     return (
         <div>
-            Counter: {count}
-            <button onClick={() => setCount(count + 1)}>Click</button>
+            Counter: {count.value}
+            <button onClick={() => dispatch({ type: "INCREMENT" })}>INCREMENT</button>
+            <button onClick={() => dispatch({ type: "DECREMENT" })}>DECREMENT</button>
+            <button onClick={() => dispatch({ type: "INCREASE", payload: 10 })}>INCREASE</button>
         </div>
     );
 };
