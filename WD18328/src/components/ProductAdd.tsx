@@ -2,6 +2,7 @@ import { useContext } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 import { ProductContext } from "../context/ProductProvider";
+import axios from "axios";
 
 type Inputs = {
     name: string;
@@ -9,7 +10,7 @@ type Inputs = {
 };
 
 const ProductAdd = () => {
-    const { onHandleAdd } = useContext(ProductContext);
+    const { dispatch } = useContext(ProductContext);
     const navigate = useNavigate();
     const {
         register,
@@ -17,9 +18,14 @@ const ProductAdd = () => {
         formState: { errors },
     } = useForm<Inputs>();
 
-    const onSubmit: SubmitHandler<Inputs> = (data) => {
-        onHandleAdd(data);
-        navigate("/products");
+    const onSubmit: SubmitHandler<Inputs> = async (product) => {
+        try {
+            const { data } = await axios.post(`http://localhost:3000/products`, product);
+            dispatch({ type: "ADD_PRODUCT", payload: data });
+            navigate("/products");
+        } catch (error) {
+            console.log(error);
+        }
     };
 
     return (
