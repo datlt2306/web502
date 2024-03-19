@@ -2,33 +2,23 @@
   "products": [
     {
       "id": 1,
-      "name": "Product A",
+      "name": "Update",
       "price": 200
     },
     {
-      "name": "Sản phẩm 2",
-      "price": 200,
-      "id": 2
+      "id": 4,
+      "name": "Update",
+      "price": 200
     },
     {
-      "name": "Sản phẩm 2",
-      "price": 200,
-      "id": 3
+      "id": 5,
+      "name": "Update",
+      "price": 200
     },
     {
-      "name": "Sản phẩm 2",
-      "price": 200,
-      "id": 4
-    },
-    {
-      "name": "Sản phẩm 2",
-      "price": 200,
-      "id": 5
-    },
-    {
-      "name": "Sản phẩm 2",
-      "price": 200,
-      "id": 6
+      "id": 6,
+      "name": "Update",
+      "price": 200
     }
   ]
 }

@@ -30,9 +30,34 @@ function App() {
         },
     });
 
-    const mutation = useMutation({
+    const { mutate: add } = useMutation({
         mutationFn: async (product: IProduct) => {
             const { data } = await axios.post(`http://localhost:3000/products`, product);
+            return data;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["PRODUCT_KEY"],
+            });
+        },
+    });
+    const { mutate: remove } = useMutation({
+        mutationFn: async (id: number) => {
+            const { data } = await axios.delete(`http://localhost:3000/products/${id}`);
+            return data;
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({
+                queryKey: ["PRODUCT_KEY"],
+            });
+        },
+    });
+    const { mutate: update } = useMutation({
+        mutationFn: async (product: IProduct) => {
+            const { data } = await axios.put(
+                `http://localhost:3000/products/${product.id}`,
+                product
+            );
             return data;
         },
         onSuccess: () => {
@@ -45,11 +70,15 @@ function App() {
     if (isLoading) return <div>Loading...</div>;
     return (
         <>
-            <button onClick={() => mutation.mutate({ name: "Sản phẩm 2", price: 200 })}>
-                Thêm sản phẩm
-            </button>
+            <button onClick={() => add({ name: "Sản phẩm 2", price: 200 })}>Thêm sản phẩm</button>
             {data.map((item: IProduct, index: number) => (
-                <div key={index}>{item.name}</div>
+                <div key={index}>
+                    {item.name}
+                    <button onClick={() => update({ id: item.id, name: "Update", price: 200 })}>
+                        Cập nhật
+                    </button>
+                    <button onClick={() => remove(item.id!)}>Xóa</button>
+                </div>
             ))}
         </>
     );
