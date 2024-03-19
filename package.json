@@ -1,5 +1,6 @@
 {
   "dependencies": {
+    "@tanstack/react-query": "^5.28.4",
     "immer": "^10.0.4"
   }
 }

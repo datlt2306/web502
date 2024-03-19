@@ -1,15 +1,11 @@
-import React from "react";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import ReactDOM from "react-dom/client";
 import App from "./App.tsx";
 import "./index.css";
-import { ProductContext } from "./context/product.ts";
-import ProductContextProvider from "./context/ProductContextProvider.tsx";
-import CountContextProvider from "./context/CountContextProvider.tsx";
-const product = { id: 1, name: "A", price: 200 };
+
+const queryClient = new QueryClient();
 ReactDOM.createRoot(document.getElementById("root")!).render(
-    <CountContextProvider>
-        <ProductContextProvider>
-            <App />
-        </ProductContextProvider>
-    </CountContextProvider>
+    <QueryClientProvider client={queryClient}>
+        <App />
+    </QueryClientProvider>
 );
