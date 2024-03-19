@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { Link } from "react-router-dom";
 import { IProduct } from "../interfaces/product";
@@ -25,6 +25,7 @@ const ProductList = () => {
     // }, []);
     // if (isLoading) return <>Loading....</>;
 
+    const queryClient = useQueryClient();
     const { data, isLoading, isError } = useQuery({
         queryKey: ["PRODUCT_KEY"],
         queryFn: async () => {
@@ -36,10 +37,21 @@ const ProductList = () => {
             }
         },
     });
+    const mutation = useMutation({
+        mutationFn: async (product) => {
+            await axios.post(`http://localhost:3000/products`, product);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["PRODUCT_KEY"] });
+        },
+    });
     if (isLoading) return <>Loading....</>;
     if (isError) return <>Error....</>;
     return (
         <div>
+            <button onClick={() => mutation.mutate({ name: "Sản phẩm XXX", price: 200 })}>
+                Thêm sản phẩm
+            </button>
             {data.map((item: IProduct, index: number) => (
                 <div key={index}>
                     {item.name}
