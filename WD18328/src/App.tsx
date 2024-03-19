@@ -6,13 +6,14 @@ import ProductList from "./components/ProductList";
 function App() {
     return (
         <>
-            <Counter />
+            <ProductList />
+            {/* <Counter />
             <Routes>
                 <Route path="/" element={<h1>Home Page</h1>} />
                 <Route path="products" element={<ProductList />} />
                 <Route path="products/add" element={<ProductAdd />} />
                 <Route path="products/:id/edit" element={<ProductEdit />} />
-            </Routes>
+            </Routes> */}
             <div></div>
         </>
     );
