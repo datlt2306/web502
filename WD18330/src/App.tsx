@@ -1,10 +1,7 @@
-import axios from "axios";
-import { useContext, useEffect, useState } from "react";
-import "./App.css";
-import Counter from "./components/Counter";
-import { ProductContext } from "./context/ProductContextProvider";
-import { IProduct } from "./interfaces/product";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import axios from "axios";
+import "./App.css";
+import { IProduct } from "./interfaces/product";
 
 function App() {
     // const [products, setProducts] = useState([]);
@@ -39,7 +36,9 @@ function App() {
             return data;
         },
         onSuccess: () => {
-            queryClient.invalidateQueries("PRODUCT_KEY");
+            queryClient.invalidateQueries({
+                queryKey: ["PRODUCT_KEY"],
+            });
         },
     });
 
