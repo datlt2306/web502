@@ -2,23 +2,18 @@
   "products": [
     {
       "id": 2,
-      "name": "Product 2",
-      "price": 19.99
+      "name": "Sản phẩm 3 update",
+      "price": 200
     },
     {
       "id": 3,
-      "name": "Product 3",
-      "price": 7.99
-    },
-    {
-      "name": "11111",
-      "price": "1111111",
-      "id": 4
+      "name": "Sản phẩm 3 update",
+      "price": 200
     },
     {
       "name": "Sản phẩm XXX",
       "price": 200,
-      "id": 5
+      "id": 4
     }
   ]
 }

@@ -37,9 +37,25 @@ const ProductList = () => {
             }
         },
     });
-    const mutation = useMutation({
+    const { mutate: add, isPending } = useMutation({
         mutationFn: async (product) => {
             await axios.post(`http://localhost:3000/products`, product);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["PRODUCT_KEY"] });
+        },
+    });
+    const { mutate: remove } = useMutation({
+        mutationFn: async (id: number) => {
+            await axios.delete(`http://localhost:3000/products/${id}`);
+        },
+        onSuccess: () => {
+            queryClient.invalidateQueries({ queryKey: ["PRODUCT_KEY"] });
+        },
+    });
+    const { mutate: edit } = useMutation({
+        mutationFn: async (product: IProduct) => {
+            await axios.put(`http://localhost:3000/products/${product.id}`, product);
         },
         onSuccess: () => {
             queryClient.invalidateQueries({ queryKey: ["PRODUCT_KEY"] });
@@ -49,16 +65,19 @@ const ProductList = () => {
     if (isError) return <>Error....</>;
     return (
         <div>
-            <button onClick={() => mutation.mutate({ name: "Sản phẩm XXX", price: 200 })}>
-                Thêm sản phẩm
+            <button onClick={() => add({ name: "Sản phẩm XXX", price: 200 })}>
+                {isPending ? "Adding..." : "Add Product"}
             </button>
+
             {data.map((item: IProduct, index: number) => (
                 <div key={index}>
                     {item.name}
-                    <Link to={`/products/${item.id}/edit`}>Edit</Link>
-                    {/* <button onClick={() => dispatch({ type: "DELETE_PRODUCT", payload: item.id! })}>
-                        Remove
-                    </button> */}
+                    <button
+                        onClick={() => edit({ id: item.id, name: "Sản phẩm 3 update", price: 200 })}
+                    >
+                        cập nhật sản phẩm
+                    </button>
+                    <button onClick={() => remove(item.id!)}>Remove</button>
                 </div>
             ))}
         </div>
