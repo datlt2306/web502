@@ -1,6 +1,5 @@
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import { IProduct } from "../interfaces/product";
 
 const ProductList = () => {

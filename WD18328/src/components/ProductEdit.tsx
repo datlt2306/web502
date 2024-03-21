@@ -1,9 +1,7 @@
 import axios from "axios";
-import React, { useContext, useEffect } from "react";
-import { IProduct } from "../interfaces/product";
-import { useForm, SubmitHandler } from "react-hook-form";
+import { useEffect } from "react";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { ProductContext } from "../context/ProductProvider";
 
 type Inputs = {
     name: string;
@@ -11,7 +9,7 @@ type Inputs = {
 };
 
 const ProductEdit = () => {
-    const { onHandleEdit } = useContext(ProductContext);
+    // const { onHandleEdit } = useContext(ProductContext);
     const navigate = useNavigate();
     const { id } = useParams();
     const {

@@ -1,19 +1,23 @@
 import { Route, Routes } from "react-router-dom";
-import Counter from "./components/Counter";
+import ProductList from "./components/ProductList";
+import WebsiteLayout from "./components/layouts/website";
 import ProductAdd from "./components/ProductAdd";
 import ProductEdit from "./components/ProductEdit";
-import ProductList from "./components/ProductList";
+import AdminLayout from "./components/layouts/admin";
 function App() {
     return (
         <>
-            <ProductList />
-            {/* <Counter />
             <Routes>
-                <Route path="/" element={<h1>Home Page</h1>} />
-                <Route path="products" element={<ProductList />} />
-                <Route path="products/add" element={<ProductAdd />} />
-                <Route path="products/:id/edit" element={<ProductEdit />} />
-            </Routes> */}
+                <Route path="/" element={<WebsiteLayout />}>
+                    <Route index element={<ProductList />} />
+                </Route>
+                <Route path="admin" element={<AdminLayout />}>
+                    <Route index element={<h1>Dashboard Page</h1>} />
+                    <Route path="products" element={<h1>Product Management</h1>} />
+                    <Route path="products/add" element={<ProductAdd />} />
+                    <Route path="products/:id/edit" element={<ProductEdit />} />
+                </Route>
+            </Routes>
             <div></div>
         </>
     );
