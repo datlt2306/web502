@@ -2,25 +2,9 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import "./App.css";
 import { IProduct } from "./interfaces/product";
+import ProductAdd from "./components/ProductAdd";
 
 function App() {
-    // const [products, setProducts] = useState([]);
-    // const [isLoading, setIsLoading] = useState(false);
-    // const [isError, setIsError] = useState("");
-    // useEffect(() => {
-    //     (async () => {
-    //         try {
-    //             setIsLoading(true);
-    //             const { data } = await axios.get(`http://localhost:3000/products`);
-    //             setProducts(data);
-    //             setIsLoading(false);
-    //         } catch (error) {
-    //             setIsError(error);
-    //         }
-    //     })();
-    // }, []);
-
-    // if (isLoading) return <div>Loading...</div>;
     const queryClient = useQueryClient();
     const { data, isLoading } = useQuery({
         queryKey: ["PRODUCT_KEY"],
@@ -70,16 +54,13 @@ function App() {
     if (isLoading) return <div>Loading...</div>;
     return (
         <>
-            <button onClick={() => add({ name: "Sản phẩm 2", price: 200 })}>Thêm sản phẩm</button>
-            {data.map((item: IProduct, index: number) => (
-                <div key={index}>
-                    {item.name}
-                    <button onClick={() => update({ id: item.id, name: "Update", price: 200 })}>
-                        Cập nhật
-                    </button>
-                    <button onClick={() => remove(item.id!)}>Xóa</button>
+            {data?.map((product: IProduct) => (
+                <div key={product.id}>
+                    <span>{product.name}</span>
+                    <span>{product.price}</span>
                 </div>
             ))}
+            <ProductAdd />
         </>
     );
 }
