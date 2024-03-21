@@ -1,7 +1,8 @@
+import { useMutation, useQuery } from "@tanstack/react-query";
 import axios from "axios";
-import { useEffect } from "react";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
+import { IProduct } from "../interfaces/product";
 
 type Inputs = {
     name: string;
@@ -9,7 +10,6 @@ type Inputs = {
 };
 
 const ProductEdit = () => {
-    // const { onHandleEdit } = useContext(ProductContext);
     const navigate = useNavigate();
     const { id } = useParams();
     const {
@@ -19,28 +19,53 @@ const ProductEdit = () => {
         reset,
     } = useForm<Inputs>();
 
-    useEffect(() => {
-        (async () => {
+    const { isLoading } = useQuery({
+        queryKey: ["PRODUCT_KEY", id],
+        queryFn: async () => {
             const { data } = await axios.get(`http://localhost:3000/products/${id}`);
+            // Fill giá trị từ api vào form
             reset(data);
-        })();
-    }, []);
+            return data;
+        },
+    });
+
+    const mutation = useMutation({
+        mutationFn: async (product: IProduct) => {
+            const { data } = await axios.put(
+                `http://localhost:3000/products/${product.id}`,
+                product
+            );
+            return data;
+        },
+        onSuccess: () => {
+            console.log("Update success");
+        },
+    });
+
     const onSubmit: SubmitHandler<Inputs> = (data) => {
-        onHandleEdit(data);
+        mutation.mutate(data);
         navigate("/products");
     };
 
     return (
         <div>
             <form onSubmit={handleSubmit(onSubmit)}>
-                <input
-                    type="text"
-                    placeholder="Tên sản phẩm"
-                    {...register("name", { required: true })}
-                />
-                {errors.name && <span style={{ color: "red" }}>This field is required</span>}
-                <input type="number" placeholder="Giá sản phẩm" {...register("price")} />
-                <button>Cập nhật sản phẩm</button>
+                {isLoading ? (
+                    <span>Loading...</span>
+                ) : (
+                    <>
+                        <input
+                            type="text"
+                            placeholder="Tên sản phẩm"
+                            {...register("name", { required: true })}
+                        />
+                        {errors.name && (
+                            <span style={{ color: "red" }}>This field is required</span>
+                        )}
+                        <input type="number" placeholder="Giá sản phẩm" {...register("price")} />
+                        <button>Cập nhật sản phẩm</button>
+                    </>
+                )}
             </form>
         </div>
     );
