@@ -2,20 +2,10 @@ import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
 import axios from "axios";
 import { IProduct } from "../interfaces/product";
 import { Link } from "react-router-dom";
+import useProductQuery from "../hooks/useProductQuery";
 
 const ProductList = () => {
-    // const queryClient = useQueryClient();
-    const { data, isLoading, isError } = useQuery({
-        queryKey: ["PRODUCT_KEY"],
-        queryFn: async () => {
-            try {
-                const { data } = await axios.get(`http://localhost:3000/products`);
-                return data;
-            } catch (error) {
-                return error;
-            }
-        },
-    });
+    const { data, isLoading, isError } = useProductQuery();
     if (isLoading) return <>Loading....</>;
     if (isError) return <>Error....</>;
     return (

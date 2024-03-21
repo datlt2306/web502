@@ -3,6 +3,7 @@ import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
 import { IProduct } from "../interfaces/product";
+import useProductQuery from "../hooks/useProductQuery";
 
 type Inputs = {
     name: string;
@@ -19,15 +20,16 @@ const ProductEdit = () => {
         reset,
     } = useForm<Inputs>();
 
-    const { isLoading } = useQuery({
-        queryKey: ["PRODUCT_KEY", id],
-        queryFn: async () => {
-            const { data } = await axios.get(`http://localhost:3000/products/${id}`);
-            // Fill giá trị từ api vào form
-            reset(data);
-            return data;
-        },
-    });
+    // const { isLoading } = useQuery({
+    //     queryKey: ["PRODUCT_KEY", id],
+    //     queryFn: async () => {
+    //         const { data } = await axios.get(`http://localhost:3000/products/${id}`);
+    //         // Fill giá trị từ api vào form
+    //         reset(data);
+    //         return data;
+    //     },
+    // });
+    const { isLoading } = useProductQuery(id);
 
     const mutation = useMutation({
         mutationFn: async (product: IProduct) => {
