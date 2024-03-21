@@ -27,11 +27,7 @@ const ProductEdit = () => {
             );
             return data;
         },
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ["PRODUCT_KEY"],
-            });
-        },
+        onSuccess: () => {},
     });
     const onSubmit = (product: IProduct) => {
         mutation.mutate(product);

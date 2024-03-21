@@ -5,17 +5,14 @@ import "./App.css";
 import ProductAdd from "./components/ProductAdd";
 import ProductEdit from "./components/ProductEdit";
 import { IProduct } from "./interfaces/product";
+import Counter from "./components/Counter";
+import useProductQuery from "./hooks/useProductQuery";
 function App() {
-    const { data, isLoading } = useQuery({
-        queryKey: ["PRODUCT_KEY"],
-        queryFn: async () => {
-            const { data } = await axios.get(`http://localhost:3000/products`);
-            return data;
-        },
-    });
+    const { data, isLoading } = useProductQuery();
     if (isLoading) return <div>Loading...</div>;
     return (
         <>
+            <Counter />
             <Routes>
                 <Route
                     path="/"
