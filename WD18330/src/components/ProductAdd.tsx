@@ -1,36 +1,15 @@
-import { useMutation, useQueryClient } from "@tanstack/react-query";
-import React from "react";
-import { useForm } from "react-hook-form";
-import { IProduct } from "../interfaces/product";
-import axios from "axios";
+import useProductMutation from "../hooks/useProductMutation";
+
 const ProductAdd = () => {
-    const {
-        register,
-        handleSubmit,
-        formState: { errors },
-    } = useForm();
-    const queryClient = useQueryClient();
-    const mutation = useMutation({
-        mutationFn: async (product: IProduct) => {
-            const { data } = await axios.post(`http://localhost:3000/products`, product);
-            return data;
-        },
-        onSuccess: () => {
-            queryClient.invalidateQueries({
-                queryKey: ["PRODUCT_KEY"],
-            });
-        },
+    const { form, onSubmit, isPending } = useProductMutation({
+        action: "CREATE",
     });
-    const onSubmit = (product) => {
-        mutation.mutate(product);
-        console.log(product);
-    };
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" {...register("name")} />
-                <input type="number" {...register("price")} />
-                <button>Thêm sản phẩm</button>
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+                <input type="text" {...form.register("name")} />
+                <input type="number" {...form.register("price")} />
+                <button>{isPending ? "Creating..." : "Thêm sản phẩm"}</button>
             </form>
         </div>
     );

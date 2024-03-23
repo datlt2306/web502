@@ -22,13 +22,13 @@ function App() {
                                 <span>{product.name}</span>
                             </Link>
                             <span>{product.price}</span>
-                            <Link to={`/edit/${product.id}`}>Edit</Link>
+                            <Link to={`/products/edit/${product.id}`}>Edit</Link>
                         </div>
                     ))}
                 />
                 <Route path="products/:id" element={<ProductDetail />} />
-                <Route path="add" element={<ProductAdd />} />
-                <Route path="edit/:id" element={<ProductEdit />} />
+                <Route path="products/add" element={<ProductAdd />} />
+                <Route path="products/edit/:id" element={<ProductEdit />} />
             </Routes>
         </>
     );

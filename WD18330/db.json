@@ -7,7 +7,7 @@
     },
     {
       "id": 4,
-      "name": "Update",
+      "name": "Update 10000xxx",
       "price": 200
     },
     {
@@ -34,6 +34,21 @@
       "name": "sản phẩm XX",
       "price": "123456",
       "id": 9
+    },
+    {
+      "name": "sản phẩm X1",
+      "price": "100",
+      "id": 10
+    },
+    {
+      "name": "sản phẩm XX2",
+      "price": "200",
+      "id": 11
+    },
+    {
+      "name": "sản phẩm XX3",
+      "price": "300",
+      "id": 12
     }
   ]
 }
