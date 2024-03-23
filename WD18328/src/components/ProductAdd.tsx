@@ -1,20 +1,20 @@
 import useProductMutation from "../hooks/useProductMutation";
 
 const ProductAdd = () => {
-    const { register, handleSubmit, onSubmit, formState } = useProductMutation({
+    const { form, onSubmit } = useProductMutation({
         action: "CREATE",
-        callback: () => {
-            console.log("Đã thêm thành công");
+        onSuccess: () => {
+            console.log("Thêm sản phẩm thành công");
         },
     });
     return (
         <div>
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <input type="text" placeholder="Tên sản phẩm" {...register("name")} />
-                {formState.errors.name && (
+            <form onSubmit={form.handleSubmit(onSubmit)}>
+                <input type="text" placeholder="Tên sản phẩm" {...form.register("name")} />
+                {form.formState.errors.name && (
                     <span style={{ color: "red" }}>This field is required</span>
                 )}
-                <input type="number" placeholder="Giá sản phẩm" {...register("price")} />
+                <input type="number" placeholder="Giá sản phẩm" {...form.register("price")} />
                 <button>Thêm sản phẩm</button>
             </form>
         </div>

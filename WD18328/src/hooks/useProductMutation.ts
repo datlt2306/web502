@@ -9,10 +9,10 @@ type Inputs = {
 };
 type useProductMutationProps = {
     action: "CREATE" | "UPDATE" | "DELETE",
-    callback?: () => void
+    onSuccess?: () => void
 }
-const useProductMutation = ({ action, callback }: useProductMutationProps) => {
-    const { mutate } = useMutation({
+const useProductMutation = ({ action, onSuccess }: useProductMutationProps) => {
+    const { mutate, ...rest } = useMutation({
         mutationFn: async (product: IProduct) => {
             switch (action) {
                 case "CREATE":
@@ -24,14 +24,10 @@ const useProductMutation = ({ action, callback }: useProductMutationProps) => {
 
         },
         onSuccess: () => {
-            callback && callback();
+            onSuccess && onSuccess();
         },
     });
-    const {
-        register,
-        handleSubmit,
-        formState
-    } = useForm<Inputs>();
+    const form = useForm<Inputs>();
 
     const onSubmit: SubmitHandler<Inputs> = async (product) => {
         mutate(product);
@@ -41,9 +37,8 @@ const useProductMutation = ({ action, callback }: useProductMutationProps) => {
     return {
         mutate,
         onSubmit,
-        register,
-        formState,
-        handleSubmit
+        form,
+        ...rest
     }
 }
 
