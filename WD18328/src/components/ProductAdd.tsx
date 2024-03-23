@@ -1,10 +1,14 @@
+import { useNavigate } from "react-router-dom";
 import useProductMutation from "../hooks/useProductMutation";
 
 const ProductAdd = () => {
+    const navigate = useNavigate();
     const { form, onSubmit } = useProductMutation({
         action: "CREATE",
         onSuccess: () => {
-            console.log("Thêm sản phẩm thành công");
+            // toast => thông báo
+            alert("Bạn đã thêm sản phẩm thành công");
+            navigate("/admin/products");
         },
     });
     return (

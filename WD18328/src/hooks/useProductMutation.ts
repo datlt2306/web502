@@ -8,20 +8,25 @@ type Inputs = {
     price: number;
 };
 type useProductMutationProps = {
-    action: "CREATE" | "UPDATE" | "DELETE",
-    onSuccess?: () => void
+    action: "CREATE" | "UPDATE" | "DELETE";
+    onSuccess?: () => void;
 }
 const useProductMutation = ({ action, onSuccess }: useProductMutationProps) => {
-    const { mutate, ...rest } = useMutation({
+    const { ...rest } = useMutation({
         mutationFn: async (product: IProduct) => {
             switch (action) {
                 case "CREATE":
                     await axios.post(`http://localhost:3000/products`, product);
+                    break
+                case "UPDATE":
+                    await axios.put(`http://localhost:3000/products/${product.id}`, product);
+                    break;
+                case "DELETE":
+                    await axios.delete(`http://localhost:3000/products/${product.id}`);
                     break;
                 default:
-                    return null
+                    return null;
             }
-
         },
         onSuccess: () => {
             onSuccess && onSuccess();
@@ -32,14 +37,11 @@ const useProductMutation = ({ action, onSuccess }: useProductMutationProps) => {
     const onSubmit: SubmitHandler<Inputs> = async (product) => {
         mutate(product);
     };
-
-
     return {
-        mutate,
-        onSubmit,
         form,
+        onSubmit,
         ...rest
     }
-}
 
+}
 export default useProductMutation;
