@@ -1,17 +1,11 @@
 import { useQuery } from "@tanstack/react-query";
-import axios from "axios";
+import { getAllProducts, getSingleProduct } from "../services/product";
 
 const useProductQuery = (id?: number | string) => {
     const { data, ...rest } = useQuery({
         queryKey: ["PRODUCT_KEY", id],
         queryFn: async () => {
-            if (!id) {
-                const { data } = await axios.get(`http://localhost:3000/products`);
-                return data;
-            } else {
-                const { data } = await axios.get(`http://localhost:3000/products/${id}`);
-                return data;
-            }
+            return id ? await getSingleProduct(id) : await getAllProducts();
         },
     });
 

@@ -1,9 +1,10 @@
-import { useMutation, useQuery } from "@tanstack/react-query";
+import { useMutation } from "@tanstack/react-query";
 import axios from "axios";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useNavigate, useParams } from "react-router-dom";
-import { IProduct } from "../interfaces/product";
 import useProductQuery from "../hooks/useProductQuery";
+import { IProduct } from "../interfaces/product";
+import { useEffect } from "react";
 
 type Inputs = {
     name: string;
@@ -13,6 +14,7 @@ type Inputs = {
 const ProductEdit = () => {
     const navigate = useNavigate();
     const { id } = useParams();
+    const { data, isLoading } = useProductQuery(id);
     const {
         register,
         handleSubmit,
@@ -20,17 +22,9 @@ const ProductEdit = () => {
         reset,
     } = useForm<Inputs>();
 
-    // const { isLoading } = useQuery({
-    //     queryKey: ["PRODUCT_KEY", id],
-    //     queryFn: async () => {
-    //         const { data } = await axios.get(`http://localhost:3000/products/${id}`);
-    //         // Fill giá trị từ api vào form
-    //         reset(data);
-    //         return data;
-    //     },
-    // });
-    const { isLoading } = useProductQuery(id);
-
+    useEffect(() => {
+        reset(data);
+    }, [id, reset, data]);
     const mutation = useMutation({
         mutationFn: async (product: IProduct) => {
             const { data } = await axios.put(
@@ -46,7 +40,7 @@ const ProductEdit = () => {
 
     const onSubmit: SubmitHandler<Inputs> = (data) => {
         mutation.mutate(data);
-        navigate("/products");
+        // navigate("/products");
     };
 
     return (
