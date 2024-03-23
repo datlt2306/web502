@@ -1,21 +1,30 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
+import { SubmitHandler, useForm } from "react-hook-form";
 import { IProduct } from "../interfaces/product";
-import { axiosInstance } from "../config/axios";
+import { createProduct, deleteProduct, updateProduct } from "../services/product";
 type useProductMutationProps = {
     action: "CREATE" | "UPDATE" | "DELETE";
 }
+type Inputs = {
+    name: string;
+    price: number;
+}
 const useProductMutation = ({ action }: useProductMutationProps) => {
-    const form = useForm();
+    const form = useForm({
+        defaultValues: { name: "", price: 0 }
+    });
     const queryClient = useQueryClient();
     const { mutate, ...rest } = useMutation({
         mutationFn: async (product: IProduct) => {
             switch (action) {
                 case "CREATE":
-                    await axiosInstance.post(`http://localhost:3000/products`, product);
+                    await createProduct(product);
                     break;
                 case "UPDATE":
-                    await axiosInstance.put(`http://localhost:3000/products/${product.id}`, product);
+                    await updateProduct(product)
+                    break;
+                case "DELETE":
+                    await deleteProduct(product.id!)
                     break;
                 default:
                     return null
@@ -27,10 +36,10 @@ const useProductMutation = ({ action }: useProductMutationProps) => {
             });
         },
     });
-    const onSubmit = (product: IProduct) => {
+    const onSubmit: SubmitHandler<Inputs> = (product) => {
         mutate(product);
     };
 
-    return { form, onSubmit, ...rest }
+    return { mutate, form, onSubmit, ...rest }
 }
 export default useProductMutation;

@@ -1,16 +1,6 @@
 {
   "products": [
     {
-      "id": 1,
-      "name": "Update 11111111 2232132132131231",
-      "price": 200
-    },
-    {
-      "id": 4,
-      "name": "Update 10000xxx",
-      "price": 200
-    },
-    {
       "id": 5,
       "name": "Update",
       "price": 200

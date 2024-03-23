@@ -8,8 +8,12 @@ import { IProduct } from "./interfaces/product";
 import Counter from "./components/Counter";
 import useProductQuery from "./hooks/useProductQuery";
 import ProductDetail from "./components/ProductDetail";
+import useProductMutation from "./hooks/useProductMutation";
 function App() {
     const { data, isLoading } = useProductQuery();
+    const { mutate } = useProductMutation({
+        action: "DELETE",
+    });
     if (isLoading) return <div>Loading...</div>;
     return (
         <>
@@ -23,6 +27,7 @@ function App() {
                             </Link>
                             <span>{product.price}</span>
                             <Link to={`/products/edit/${product.id}`}>Edit</Link>
+                            <button onClick={() => mutate(product)}>Xóa</button>
                         </div>
                     ))}
                 />
