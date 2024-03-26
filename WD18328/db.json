@@ -1,79 +1,66 @@
 {
-  "products": [
-    {
-      "id": 2,
-      "name": "Sản phẩm 3 update 4",
-      "price": 200
-    },
-    {
-      "id": 3,
-      "name": "Sản phẩm 3 update",
-      "price": 200
-    },
-    {
-      "name": "Sản phẩm XXX",
-      "price": 200,
-      "id": 4
-    },
-    {
-      "name": "Sản phẩm mới XX",
-      "price": "123",
-      "id": 5
-    },
-    {
-      "name": "Sản phẩm XXX",
-      "price": "123",
-      "id": 6
-    },
-    {
-      "name": "Sản phẩm xxxx",
-      "price": "123456",
-      "id": 7
-    },
-    {
-      "name": "sản phẩm mới XXX 1",
-      "price": "1231231",
-      "id": 8
-    },
-    {
-      "name": "ahihiihhihi",
-      "price": "1231232131",
-      "id": 9
-    }
-  ],
-  "cart": [
-    {
-      "id": 1,
-      "userId": 1,
-      "items": [
+    "products": [
         {
-          "id": 1,
-          "quantity": 2,
-          "image": "",
-          "price": 0,
-          "name": "Sản phẩm A"
-        }
-      ]
-    },
-    {
-      "userId": 2,
-      "items": [
-        {
-          "id": 1,
-          "quantity": 1,
-          "image": "",
-          "price": 0,
-          "name": "Sản phẩm B"
+            "id": 2,
+            "name": "Sản phẩm 3 update 4",
+            "price": 200
         },
         {
-          "id": 2,
-          "quantity": 2,
-          "image": "",
-          "price": 0,
-          "name": "Sản phẩm C"
+            "id": 3,
+            "name": "Sản phẩm 3 update",
+            "price": 200
+        },
+        {
+            "name": "Sản phẩm XXX",
+            "price": 200,
+            "id": 4
+        },
+        {
+            "name": "Sản phẩm mới XX",
+            "price": "123",
+            "id": 5
+        },
+        {
+            "name": "Sản phẩm XXX",
+            "price": "123",
+            "id": 6
+        },
+        {
+            "name": "Sản phẩm xxxx",
+            "price": "123456",
+            "id": 7
+        },
+        {
+            "name": "sản phẩm mới XXX 1",
+            "price": "1231231",
+            "id": 8
+        },
+        {
+            "name": "ahihiihhihi",
+            "price": "1231232131",
+            "id": 9
         }
-      ],
-      "id": 2
-    }
-  ]
+    ],
+    "cart": [
+        {
+            "id": 1,
+            "userId": 1,
+            "items": [
+                {
+                    "id": 1,
+                    "quantity": 5,
+                    "image": "",
+                    "price": 0,
+                    "name": "Sản phẩm A"
+                },
+                {
+                    "id": 2,
+                    "quantity": 3,
+                    "image": "",
+                    "price": 0,
+                    "name": "Sản phẩm B"
+                }
+            ]
+        }
+    ]
 }
