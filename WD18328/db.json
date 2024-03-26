@@ -40,5 +40,40 @@
       "price": "1231232131",
       "id": 9
     }
+  ],
+  "cart": [
+    {
+      "id": 1,
+      "userId": 1,
+      "items": [
+        {
+          "id": 1,
+          "quantity": 2,
+          "image": "",
+          "price": 0,
+          "name": "Sản phẩm A"
+        }
+      ]
+    },
+    {
+      "userId": 2,
+      "items": [
+        {
+          "id": 1,
+          "quantity": 1,
+          "image": "",
+          "price": 0,
+          "name": "Sản phẩm B"
+        },
+        {
+          "id": 2,
+          "quantity": 2,
+          "image": "",
+          "price": 0,
+          "name": "Sản phẩm C"
+        }
+      ],
+      "id": 2
+    }
   ]
 }
